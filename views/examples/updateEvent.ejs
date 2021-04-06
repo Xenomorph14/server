@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Create User</title>
+  <title>Update Event</title>
   <!-- Favicon -->
   <link rel="icon" href="../assets/img/brand/logo-white.svg" type="image/png">
   <!-- Fonts -->
@@ -17,10 +17,6 @@
   <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="../assets/css/argon.css?v=1.2.0" type="text/css">
-
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
-  
 </head>
 
 <body>
@@ -127,6 +123,7 @@
                 <i class="ni ni-zoom-split-in"></i>
               </a>
             </li>
+            
           </ul>
           <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
             <li class="nav-item dropdown">
@@ -168,92 +165,49 @@
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Create profile </h3>
+                  <h3 class="mb-0">Update Event </h3>
                 </div>
               
               </div>
             </div>
             <div class="card-body">
-              <% if (messages.createUserSuccess) { %>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                  <%= messages.createUserSuccess %>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-            <% } %>
-              <% if (messages.createUserFailed) { %>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                  <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                  <%= messages.createUserFailed %>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-            <% } %>
-              <form action="/admin/storeUser" method="POST">
-                <h6 class="heading-small text-muted mb-4">User information</h6>
+              <form action="/admin/updateEvent" method="POST">
+                <h6 class="heading-small text-muted mb-4">Update Event Information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6" style="display: none;">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-username">Name</label>
-                        <input name="name" required type="text" id="input-username" class="form-control" placeholder="Username">
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-email">Email address</label>
-                        <input name="email" required type="email" id="input-email" class="form-control" placeholder="abc@gmail.com">
+                        <label class="form-control-label" for="input-id">ID</label>
+                        <input name="id" required type="text" id="input-id" class="form-control" placeholder="Id" value="<%= eventInfor %>">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">Position</label>
-                        <input name="position" required type="text" id="input-first-name" class="form-control" placeholder="Marketing manager etc.." >
+                        <label class="form-control-label" for="input-new-username">New name</label>
+                        <input name="newName" type="text" id="input-new-username" class="form-control" placeholder="Name event">
                       </div>
                     </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-new-birthday">New date</label>
+                        <input name="newDate" type="date" id="input-new-birthday" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-last-name">Department</label>
-                        <input required name="department" type="text" id="input-last-name" class="form-control" placeholder="Marketing etc..">
+                        <label class="form-control-label" for="input-new-position">New position</label>
+                        <input name="newPosition" type="text" id="input-new-position" class="form-control" placeholder="Công viên thống nhất, hồ gươm, ..." >
                       </div>
                     </div>
                   </div>
                 </div>
-
-                <!-- Address -->
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-md-12">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-city">Birthday</label>
-                        <input required name="birthday" type="date" id="input-city" class="form-control" placeholder="City" value="New York">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Phone number</label>
-                        <input required name="phonenumber" type="text" id="input-country" class="form-control" value="0">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Password</label>
-                        <input required name="password" type="password" id="input-postal-code" class="form-control" value="123456">
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <!-- button submit -->
                 <div class="col-12 text-right">
-                  <button type="submit" class="btn btn-sm btn-primary">Create</button>
+                  <button type="submit" class="btn btn-sm btn-primary">Update Event</button>
                 </div>
               </form>
             </div>

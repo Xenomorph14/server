@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Create User</title>
+  <title>User Information</title>
   <!-- Favicon -->
   <link rel="icon" href="../assets/img/brand/logo-white.svg" type="image/png">
   <!-- Fonts -->
@@ -17,10 +17,10 @@
   <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="../assets/css/argon.css?v=1.2.0" type="text/css">
-
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
-  
+  <link rel="stylesheet" href="./paging.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+</header>
 </head>
 
 <body>
@@ -68,24 +68,11 @@
                 <span class="nav-link-text">Create event</span>
               </a>
             </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="/admin/updateUser">
-                <i class="ni ni-tv-2 text-primary"></i>
-                <span class="nav-link-text">Update user</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/admin/updateEvent">
-                <i class="ni ni-tv-2 text-primary"></i>
-                <span class="nav-link-text">Update event</span>
-              </a>
-            </li> -->
           </ul>
           <!-- Divider -->
           <hr class="my-3">
-    
           <!-- Navigation -->
-      
+    
         </div>
       </div>
     </div>
@@ -93,7 +80,7 @@
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <nav class="navbar navbar-top navbar-expand navbar-dark bg-default border-bottom">
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
@@ -157,111 +144,143 @@
     </nav>
     <!-- Header -->
     <!-- Header -->
-    <div class="header pb-6 d-flex align-items-center" style="min-height: 100px; background-image: url(../assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
-    
-    </div>
-    <!-- Page content -->
-    <div class="container-fluid mt--6">
-      <div class="row">
-        <div class="col-xl-12 order-xl-1">
-          <div class="card">
-            <div class="card-header">
-              <div class="row align-items-center">
-                <div class="col-8">
-                  <h3 class="mb-0">Create profile </h3>
-                </div>
-              
-              </div>
-            </div>
-            <div class="card-body">
-              <% if (messages.createUserSuccess) { %>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                  <%= messages.createUserSuccess %>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-            <% } %>
-              <% if (messages.createUserFailed) { %>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                  <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                  <%= messages.createUserFailed %>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-            <% } %>
-              <form action="/admin/storeUser" method="POST">
-                <h6 class="heading-small text-muted mb-4">User information</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-username">Name</label>
-                        <input name="name" required type="text" id="input-username" class="form-control" placeholder="Username">
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-email">Email address</label>
-                        <input name="email" required type="email" id="input-email" class="form-control" placeholder="abc@gmail.com">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">Position</label>
-                        <input name="position" required type="text" id="input-first-name" class="form-control" placeholder="Marketing manager etc.." >
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-last-name">Department</label>
-                        <input required name="department" type="text" id="input-last-name" class="form-control" placeholder="Marketing etc..">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Address -->
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-md-12">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-city">Birthday</label>
-                        <input required name="birthday" type="date" id="input-city" class="form-control" placeholder="City" value="New York">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Phone number</label>
-                        <input required name="phonenumber" type="text" id="input-country" class="form-control" value="0">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Password</label>
-                        <input required name="password" type="password" id="input-postal-code" class="form-control" value="123456">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 text-right">
-                  <button type="submit" class="btn btn-sm btn-primary">Create</button>
-                </div>
-              </form>
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+  
+            <div class="col-lg-6 col-5 text-right">
+              <a href="/admin/createUser" class="btn btn-sm btn-neutral">New</a>
+              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <!-- Card header -->
+            <div class="card-header border-0">
+              <h3 class="mb-0">User information</h3>
+            </div>
+            <!-- <form action="/users/search" class="search-form">
+              <input type="text" name="name" placeholder="name">
+              <input type="submit">
+            </form> -->
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col" class="sort" data-sort="id">Id</th>
+                    <th scope="col" class="sort" data-sort="email">Email</th>
+                    <th scope="col" class="sort" data-sort="name">Name</th>
+                    <th scope="col" class="sort" data-sort="birthday">Birthday</th>
+                    <th scope="col" class="sort" data-sort="position">Position</th>
+                    <th scope="col" class="sort" data-sort="department">department</th>
+                    <th scope="col" class="sort" data-sort="phonenumber">Phonenumber</th>
+                    <th scope="col" class="sort" data-sort="phonenumber"></th>
+                  </tr>
+                </thead>
+
+                <tbody class="list">
+                  <tr>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <span name="id" class="name mb-0 text-sm"><%= user.id %></span>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        <span class="email"><%= user.email %></span>
+                      </span>
+                    </td>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        <span class="name"><%= user.name %></span>
+                      </span>
+                    </td>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        <span class="birthday"><%= user.birthday %></span>
+                      </span>
+                    </td>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        <span class="position"><%= user.position %></span>
+                      </span>
+                    </td>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        <span class="department"><%= user.department %></span>
+                      </span>
+                    </td>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        <span class="phonenumber"><%= user.phonenumber %></span>
+                      </span>
+                    </td>
+                    <td class="text-right">
+                      <div class="dropdown">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                          <form action="/admin/update" class="search-form">
+                            <input type="text" name="searchId" placeholder="search" value="<%= user.id %>" style="display: none;">
+                            <button type="submit" class="dropdown-item">Update</button>
+                          </form>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+              </table>
+            </div>
+
+            <!-- Card footer -->
+            <div class="card-footer py-4">
+              <nav aria-label="...">
+                <ul class="pagination justify-content-end mb-0">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">
+                      <i class="fas fa-angle-left"></i>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  <li class="page-item active">
+                    <a class="page-link" href="#">1</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">
+                      <i class="fas fa-angle-right"></i>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        
+      </div>
+      <!-- Footer -->
+      
+    </div>
   </div>
+    
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>

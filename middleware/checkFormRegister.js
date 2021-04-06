@@ -8,7 +8,7 @@ const Joi = require("joi")
         birthday: Joi.date().required(),
         position : Joi.string().min(2),
         department : Joi.string().min(2),
-        phonenumber : Joi.string().length(12)      
+        phonenumber : Joi.string().length(10)      
     })
 
 module.exports = { authSchema }

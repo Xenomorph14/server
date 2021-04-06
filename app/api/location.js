@@ -13,38 +13,39 @@ router.post("/:id",  (req,res) => {
         const lat = Number(location.lat)
         const lon = Number( location.lon)
         const distanceNow = Math.round(
-          distance(lat, lon, 21.022263014736826, 105.81621195337318)
+          distance(lat, lon, 21.022283464453064, 105.81632795887202)
         );
+        console.log(distanceNow);
         Status.findById(id, (err,status)=>{
             if (err){
                 console.log("Không tìm thấy id!");
                 return res.redirect("/")
             }
             let date = new Date();
-            
+            let newTimePoint = date.toLocaleTimeString("vi-Vi")
             // let newDate = date.getDay() + date.getMonth() + date.getFullYear;
 
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let seconds = date.getSeconds();
-    if (hours < 10) {
-      hours = `0${hours}`;
-    }
-    if (minutes < 10) {
-      minutes = `0${minutes}`;
-    }
-    if (seconds < 10) {
-      seconds = `0${seconds}`;
-    }
-    let newTimePoint = `${hours}:${minutes}:${seconds}`;
+            // let hours = date.getHours();
+            // let minutes = date.getMinutes();
+            // let seconds = date.getSeconds();
+            // if (hours < 10) {
+            // hours = `0${hours}`;
+            // }
+            // if (minutes < 10) {
+            // minutes = `0${minutes}`;
+            // }
+            // if (seconds < 10) {
+            // seconds = `0${seconds}`;
+            // }
+            // let  newTimePoint = `${hours}:${minutes}:${seconds}`;
 
             // lưu status ngày hiện tại vào time line
+           if (distanceNow < 1000) {
             Status.findById(id, function (err, time){
                 if (err){
                     res.end()
                     return console.log("Add status data to Table fail!");
                 }
-                console.log(time.timeLine.length);
                 if (time.timeLine.length === 0){
                     Status.findByIdAndUpdate(
                         id,
@@ -92,7 +93,14 @@ router.post("/:id",  (req,res) => {
                             res.json({ data : {status : "Try after 5 minutes"} }) 
                         }
             })
-        })
+
+           }else{
+               res.json({data : {
+                   status : "You are far from company"
+               }})
+           }
+        }
+        )
  
 })
 

@@ -6,13 +6,13 @@ router.post("/:id", (req, res) => {
     const id = req.params.id
     const dataUser = JSON.parse(Object.keys(req.body)[0]);
     const checkType = dataUser.typeReport
-    if (checkType == true) {
+    if (checkType === "true") {
         Report.findByIdAndUpdate( id,{
             $push : { "reportDetails" : { 
                  typeReport : dataUser.typeReport,
                 date : {
                     dateStart : dataUser.date.dateStart,
-                    dateEnd : dataUser.date.dateStart,
+                    dateEnd : dataUser.date.dateEnd,
                  },
                 content: dataUser.content
             }} 
@@ -22,7 +22,8 @@ router.post("/:id", (req, res) => {
             }
             else res.json({data : { status : "Canot report" }})
         })
-    } else {
+    } else  if(checkType === "false" ) {
+        
         Report.findByIdAndUpdate( id,{
             $push : { "reportDetails" : { 
                  typeReport : dataUser.typeReport,
@@ -38,6 +39,7 @@ router.post("/:id", (req, res) => {
             }
             else res.json({data : { status : "Canot report" }})
         })
+       
     }
 })
 
