@@ -193,6 +193,7 @@ app.post("/admin/updateEvent", checkAuthenticated, updateEvent);
 const deleteUser = require("./app/controller-Nhat/deleteUser");
 const deleteEvent = require("./app/controller-Nhat/deleteEvent");
 const deleteReport = require("./app/controller-Nhat/deleteReport");
+const renderReportInformation = require("./app/controller-Nhat/renderReportInformation");
 app.get("/admin/deleteUser", checkAuthenticated, deleteUser);
 app.get("/admin/deleteEvent", checkAuthenticated, deleteEvent);
 app.get("/admin/deleteReport", checkAuthenticated, deleteReport);
@@ -206,13 +207,14 @@ app.get("/admin/user-information", checkAuthenticated,(req,res) => {
     })
   })
 })
-app.get("/admin/report-information", checkAuthenticated, (req,res) => {
-  Report.find({}, function (err,report) {
-    res.render("reportInformation", {
-      reportLists: report,
-    })
-  })
-})
+// app.get("/admin/report-information", checkAuthenticated, (req,res) => {
+//   Report.find({}, function (err,report) {
+//     res.render("reportInformation", {
+//       reportLists: report,
+//     })
+//   })
+// })
+app.get("/admin/report-information", checkAuthenticated, renderReportInformation);
 app.get("/admin/event-information", checkAuthenticated, (req,res) => {
   Events.find({}, function (err,event) {
     res.render("event", {

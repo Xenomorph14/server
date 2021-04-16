@@ -13,7 +13,7 @@ module.exports = (req,res) => {
       }
       console.log("ở đây");
       // console.log(reports);
-      // Duyệt từng tập báo cáo của nhân viên
+      // Duyệt từng tập báo cáo của nhân viên để lấy id báo cáo
       function takeId() {
         for (let i = 0; i < reports.length; i++ ){
           if (reports[i].reportDetails.length !== 0) {
@@ -25,17 +25,10 @@ module.exports = (req,res) => {
                   m = i; n = j;
                   id2 = reports[i].id;
                   console.log(id2);
-                  // return id2 = reports[i].id;
                   Report.findById(id2, (error,rep)=>{
                     if (error){
                       console.log("lỗi");
                     }
-                    console.log("-----");
-                    console.log(rep);
-                    console.log("-----");
-                    console.log(id2);
-                    console.log(n);
-                    console.log(rep.reportDetails[n]);
                     rep.reportDetails[n].remove();
                     rep.save();
                     return res.redirect('/admin/report-information');
@@ -47,18 +40,5 @@ module.exports = (req,res) => {
         }
       }
       takeId();
-      console.log("id2");
-      
     })
-    
-    
-    // console.log(id2);
-    // let id3 = id2;
-    // console.log(id2);
-
-
-    // res.reload(); 
-    // res.redirect('back');
-    // res.redirect('/admin/report-information');
-    // return console.log("deleted");
 }
