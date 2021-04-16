@@ -183,6 +183,7 @@
                     <th scope="col" class="sort" data-sort="name">Date start</th>
                     <th scope="col" class="sort" data-sort="birthday">Date end</th>
                     <th scope="col" class="sort" data-sort="position">content</th>
+                    <th scope="col" class="sort" data-sort="position"></th>
                   </tr>
                 </thead>
 
@@ -219,7 +220,19 @@
                         <span class="email"><%= reportList.reportDetails[i].content %></span>
                       </span>
                     </td>
-
+                    <td class="text-right">
+                      <div class="dropdown">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                          <form action="/admin/deleteReport" class="search-form">
+                            <input type="text" name="deleteReport" value="<%= reportList.reportDetails[i].id %>" style="display: none;">
+                            <button type="submit" class="dropdown-item">Delete</button>
+                          </form>
+                        </div>
+                      </div>
+                    </td>
                   </tr>
                   <% } %>
                   <% }) %>

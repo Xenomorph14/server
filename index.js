@@ -184,11 +184,20 @@ const updateUser = require("./app/controller-Nhat/updateUser");
 const updateEvent = require("./app/controller-Nhat/updateEvent");
 const renderCreateEvent = require("./app/controller-Nhat/renderCreateEvent");
 const renderUpdateUser = require("./app/controller-Nhat/renderUpdateUser");
-const renderUpdateEvent = require("./app/controller-Nhat/renderUpdateEvent");
 app.get("/admin/updateUser", checkAuthenticated, renderUpdateUser);
 app.get("/admin/createEvent", checkAuthenticated, renderCreateEvent);
 app.post("/admin/updateUser", checkAuthenticated, updateUser);
 app.post("/admin/updateEvent", checkAuthenticated, updateEvent);
+
+// Mới 
+const deleteUser = require("./app/controller-Nhat/deleteUser");
+const deleteEvent = require("./app/controller-Nhat/deleteEvent");
+const deleteReport = require("./app/controller-Nhat/deleteReport");
+app.get("/admin/deleteUser", checkAuthenticated, deleteUser);
+app.get("/admin/deleteEvent", checkAuthenticated, deleteEvent);
+app.get("/admin/deleteReport", checkAuthenticated, deleteReport);
+
+
 // app.post("/admin/createEvent", createEvent);
 app.get("/admin/user-information", checkAuthenticated,(req,res) => {
   StaffInformation.find({}, function (err,user) {
@@ -266,3 +275,8 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}/`);
 });
+
+
+// file mới:  + App: deleteEvent.js, deleteReport.js, deleteUser.js 
+// update:  Views: event.ejs, reportInformation.ejs, userInformation.ejs  ; index.js: đoạn comment "Mới"
+

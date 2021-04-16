@@ -221,10 +221,10 @@
                             <input type="text" name="searchId" placeholder="id" value="<%= event.id %>" style="display: none;">
                             <button type="submit" class="dropdown-item">Update</button>
                           </form>
-                          <!-- <form action="/admin/date">
-                            <input type="text" name="check" placeholder="id" value="<%= event.id %>" style="display: none;">
-                            <input type="submit">
-                          </form> -->
+                          <form action="/admin/deleteEvent" class="search-form">
+                            <input type="text" name="deleteEvent" value="<%= event.id %>" style="display: none;">
+                            <button type="submit" class="dropdown-item">Delete</button>
+                          </form>
                         </div>
                       </div>
                     </td>
