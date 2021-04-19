@@ -10,5 +10,4 @@ const Status = new Schema({
     timeEnd :  { type:String, default: "" },
     timeLine : []
 })
-
 module.exports = mongoose.model("status",Status)

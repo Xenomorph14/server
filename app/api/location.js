@@ -4,25 +4,25 @@ const express = require("express")
 const { changeTimeToFloat } = require("../utils/handleTime")
 const router = express.Router()
 
-
+const moment = require("moment")
 
 router.post("/:id",  (req,res) => {
         let id = req.params.id;
         const location =  JSON.parse(Object.keys(req.body)[0]);
-        console.log(location);
+
         const lat = Number(location.lat)
         const lon = Number( location.lon)
         const distanceNow = Math.round(
-          distance(lat, lon, 21.022283464453064, 105.81632795887202)
+          distance(lat, lon, 20.963528714717416, 105.81668138811938)
         );
-        console.log(distanceNow);
         Status.findById(id, (err,status)=>{
             if (err){
                 console.log("Không tìm thấy id!");
                 return res.redirect("/")
             }
-            let date = new Date();
-            let newTimePoint = date.toLocaleTimeString("vi-Vi")
+  
+            var newTimePoint = moment().local().format("HH:mm:ss");
+            // newTimePoint = newTimePoint.toString();
             // let newDate = date.getDay() + date.getMonth() + date.getFullYear;
 
             // let hours = date.getHours();
@@ -50,9 +50,8 @@ router.post("/:id",  (req,res) => {
                     Status.findByIdAndUpdate(
                         id,
                         {
-                            timeStart: newTimePoint,
+                            timeStart : newTimePoint,
                         },
-                        {new: true},
                         ( err, status ) => {
                             if (err){
                                 res.end()
@@ -61,13 +60,12 @@ router.post("/:id",  (req,res) => {
                             console.log("update time start success");
                         }
                     )
-                } else  if (time.timeLine.length == 1) {
+                } else  if (time.timeLine.length >= 1) {
                     Status.findByIdAndUpdate(
                         id,
                         {
                             timeEnd: newTimePoint,
                         },
-                        {new: true},
                         ( err, status ) => {
                             if (err){
                                 res.end()
@@ -77,7 +75,7 @@ router.post("/:id",  (req,res) => {
                         }
                     )
                     }
-                        var handleTime = changeTimeToFloat(time.timeEnd,newTimePoint)
+                        var handleTime = changeTimeToFloat(time.timeEnd, newTimePoint)
                         console.log(handleTime)
                         if (handleTime  > 0.083) {
                             Status.findByIdAndUpdate(id,{

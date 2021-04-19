@@ -139,7 +139,7 @@ const cron = require("node-cron")
 const shell = require("shelljs");
 const Status = require("./app/models/status")
 const Table = require("./app/models/tableOfWork")
-cron.schedule("* */10 * * * * *", function () {
+cron.schedule("* */22 * * *", function () {
   Status.find({}, (err, status) => {
     status.forEach(element => {
       Table.findByIdAndUpdate(element._id, {
@@ -161,14 +161,14 @@ cron.schedule("* */10 * * * * *", function () {
   })
 })
 
-cron.schedule("* */5 * * * * *", function () {
-  Status.find({}, (err, status) => {
-    status.forEach(element => {
-      if (element.timeStart !== null && element.timeEnd !== null && element.timeStart !== "" && element.timeEnd !== "") {
-        Status.findByIdAndUpdate(element._id, 
-          { statusDay: 0 })
-      }
-    })
+cron.schedule("* */23 * * *", function () {
+  Status.updateMany({
+    statusDay : "1",
+    timeStart : "",
+    timeEnd : "",
+    timeLine : []
+  }, (err, status) => {
+      
   })
 })
 
