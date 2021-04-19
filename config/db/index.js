@@ -6,6 +6,8 @@ async function connect() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+    mongoose.set('useFindAndModify', false);
+    // mongoose.connect(uri, { useFindAndModify: false });
     console.log("Connect succesfully!!");
   } catch (error) {
     console.log("Connect failure!!!!");
