@@ -10,7 +10,8 @@ const StaffInformation  = new Schema({
     birthday : {type : String, required : true},
     position : {type : String, required : true},
     department : {type : String, required : true},
-    phonenumber : { type: String }
+    phonenumber : { type: String },
+    token : { type : String }
 
 });
     StaffInformation.pre("save", function (next) {

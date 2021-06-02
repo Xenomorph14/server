@@ -75,6 +75,7 @@ const updateUserControl = require("./app/controller/updateUser")
 const storeUpdateUser = require("./app/controller/storeUpdateUser")
 const storeReport = require("./app/api/storeReport")
 const userReport = require("./app/api/report")
+const changePassword = require("./app/api/changePassword")
 //Model
 
 app.use(cors())
@@ -122,7 +123,7 @@ app.get("/event", authenticateToken, aptiEvent)
 app.use("/table", authenticateToken, userTable)
 app.use("/user/report", authenticateToken, userReport)
 app.use("/user/storeReport", authenticateToken, storeReport)
-
+app.use("/user/changePassword", authenticateToken, changePassword)
 
 // Cron tab
 
