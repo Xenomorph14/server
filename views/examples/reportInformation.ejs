@@ -149,7 +149,7 @@
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    <!-- <th scope="col" class="sort" data-sort="id">Id</th> -->
+                    <th scope="col" class="sort" data-sort="name">Name</th>
                     <th scope="col" class="sort" data-sort="email">Type report</th>
                     <th scope="col" class="sort" data-sort="name">Date start</th>
                     <th scope="col" class="sort" data-sort="birthday">Date end</th>
@@ -160,11 +160,16 @@
 
                 <% reportLists.forEach((reportList) => { %>
                 <% for (let i = 0; i < reportList.reportDetails.length; i++) { %>
-
-
+                  
                 <tbody class="list">
                   <tr>
-                    
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <span name="name" class="name mb-0 text-sm"><%= reportList._id %></span>
+                        </div>
+                      </div>
+                    </th>
                     <td>
                       <span class="badge badge-dot mr-4">
                         <span class="email"><%= reportList.reportDetails[i].typeReport %></span>

@@ -29,7 +29,7 @@ module.exports = (req,res) => {
       res.render("userInformation");
     }
     console.log("aaaa");
-    res.redirect('/admin/user-information');
+    // res.redirect('/admin/user-information');
     return console.log("deleted");
   })
   Report.findByIdAndDelete(id, (err,member) => {
@@ -37,7 +37,7 @@ module.exports = (req,res) => {
       console.log("Lỗi tìm kiếm, đối tượng tìm kiếm không tồn tại!");
       res.render("userInformation");
     }
-    console.log("aaaa");
+    console.log("bbbbb");
     res.redirect('/admin/user-information');
     return console.log("deleted");
   })

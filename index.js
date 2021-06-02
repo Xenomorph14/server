@@ -56,6 +56,7 @@ const admins = [
 
 // const loginAdmin = require("./app/controller/loginAdmin")
 const home = require("./app/controller/loginAdminControl");
+const userInformation = require("./app/controller-Nhat/userInformation");     //Mới
 const create = require("./app/controller/createUser");
 const storeUser = require("./app/controller/storeUser");
 const checkAuthenticated = require("./middleware/checkAuthenticated");
@@ -71,8 +72,8 @@ const createEvent1 = require("./app/controller/createEvent")
 const aptiEvent = require("./app/api/event")
 const userTable = require("./app/api/table")
 const storeEvent = require("./app/controller/storeEvent")
-const updateUserControl = require("./app/controller/updateUser")
-const storeUpdateUser = require("./app/controller/storeUpdateUser")
+const updateUserControl = require("./app/controller/RenderUpdateUser")
+const storeUpdateUser = require("./app/controller/updateUser")
 const storeReport = require("./app/api/storeReport")
 const userReport = require("./app/api/report")
 //Model
@@ -95,11 +96,12 @@ app.use((req, res, next) => {
 });
 app.get("/admin/login", checkNotAuthenticated, home);
 app.get("/admin/createUser", checkAuthenticated, create);
+app.get("/admin/user-information", checkAuthenticated,userInformation);
 app.post(
   "/admin/login",
   checkNotAuthenticated,
   passport.authenticate("local", {
-    successRedirect: "/admin/createUser",
+    successRedirect: "/admin/user-information",
     failureRedirect: "/admin/login",
     failureFlash: true,
   })
@@ -174,9 +176,7 @@ cron.schedule("* */5 * * * * *", function () {
 
 
 // Nhat add
-const Report = require('./app/models/report')
 const Events = require('./app/models/event')
-const StaffInformation = require('./app/models/staffInformation')
 
 const createEvent = require("./app/controller-Nhat/createEvent")
 // const event = require("./app/controller-Nhat/event");
@@ -194,27 +194,15 @@ const deleteUser = require("./app/controller-Nhat/deleteUser");
 const deleteEvent = require("./app/controller-Nhat/deleteEvent");
 const deleteReport = require("./app/controller-Nhat/deleteReport");
 const renderReportInformation = require("./app/controller-Nhat/renderReportInformation");
+const searchMember = require("./app/controller-Nhat/searchMember");
 app.get("/admin/deleteUser", checkAuthenticated, deleteUser);
 app.get("/admin/deleteEvent", checkAuthenticated, deleteEvent);
 app.get("/admin/deleteReport", checkAuthenticated, deleteReport);
+app.get("/admin/report-information", checkAuthenticated, renderReportInformation);
 
 
 // app.post("/admin/createEvent", createEvent);
-app.get("/admin/user-information", checkAuthenticated,(req,res) => {
-  StaffInformation.find({}, function (err,user) {
-    res.render("userInformation", {
-      userList: user,
-    })
-  })
-})
-// app.get("/admin/report-information", checkAuthenticated, (req,res) => {
-//   Report.find({}, function (err,report) {
-//     res.render("reportInformation", {
-//       reportLists: report,
-//     })
-//   })
-// })
-app.get("/admin/report-information", checkAuthenticated, renderReportInformation);
+app.get("/admin/user-information", checkAuthenticated,userInformation)
 app.get("/admin/event-information", checkAuthenticated, (req,res) => {
   Events.find({}, function (err,event) {
     res.render("event", {
@@ -236,37 +224,16 @@ app.get("/admin/updateEventElement", checkAuthenticated, (req,res) => {
     eventInfor: idSearch
   });
 })
-app.get('/admin/searchMember', checkAuthenticated, function(req, res){
-  var id = req.query.search;
-  StaffInformation.findById(id, (err,member) => {
-    res.render('user', {
-      user: member
-    });
-  })
-})
+// app.get('/admin/searchMember', checkAuthenticated, function(req, res){
+//   var id = req.query.search;
+//   StaffInformation.findById(id, (err,member) => {
+//     res.render('user', {
+//       user: member
+//     });
+//   })
+// })
 
-app.get('/admin/searchMember', checkAuthenticated, function(req, res){
-  var email = req.query.search;
-  StaffInformation.find((err,members) => {
-    if (err){
-      console.log("Lỗi tìm kiếm, đối tượng tìm kiếm không tồn tại!");
-      res.render("userInformation");
-    }
-    var data = members.filter(function(item){
-      return item.email === email
-    });
-    let id = data[0].id;
-    StaffInformation.findById(id, (err,member) => {
-      if (err){
-        console.log("Lỗi tìm kiếm, đối tượng tìm kiếm không tồn tại!");
-        res.render("userInformation");
-      }
-      res.render('user', {
-        user: member
-      });
-    })
-  })
-})
+app.get('/admin/searchMember', checkAuthenticated, searchMember)
 
 
 

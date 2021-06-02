@@ -136,11 +136,6 @@
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
-  
-            <div class="col-lg-6 col-5 text-right">
-              <a href="/admin/createUser" class="btn btn-sm btn-neutral">New</a>
-              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
-            </div>
           </div>
         </div>
       </div>
@@ -162,7 +157,6 @@
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    <th scope="col" class="sort" data-sort="id">Id</th>
                     <th scope="col" class="sort" data-sort="email">Email</th>
                     <th scope="col" class="sort" data-sort="name">Name</th>
                     <th scope="col" class="sort" data-sort="birthday">Birthday</th>
@@ -175,13 +169,6 @@
 
                 <tbody class="list">
                   <tr>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <div class="media-body">
-                          <span name="id" class="name mb-0 text-sm"><%= user.id %></span>
-                        </div>
-                      </div>
-                    </th>
                     <td>
                       <span class="badge badge-dot mr-4">
                         <span class="email"><%= user.email %></span>

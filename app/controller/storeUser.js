@@ -1,4 +1,3 @@
-
 const StaffInformation = require ("../models/staffInformation")
 const Status = require( "../models/status" )
 const TableOfWork = require ("../models/tableOfWork")
@@ -12,7 +11,19 @@ module.exports = async (req, res, next) => {
    try{
      //validate newmember
      const result = await authSchema.validateAsync(req.body)
-
+     // convert birthday
+     let birthday = req.body.birthday.toString();
+     birthday = birthday.toString();
+     let arrayBirthday = birthday.split("-");
+     birthday = "";
+     for(let i=0; i<arrayBirthday.length; i++){
+          if (arrayBirthday.length-i-1 !== 0){
+               birthday += arrayBirthday[arrayBirthday.length-i-1] + "-";
+          } else {
+               birthday += arrayBirthday[arrayBirthday.length-i-1];
+          }
+     }
+     result.birthday = birthday;
      //Check email exist
      const emailExist = await StaffInformation.findOne({ email: req.body.email })
      if (emailExist)  {

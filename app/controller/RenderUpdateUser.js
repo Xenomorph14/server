@@ -1,4 +1,3 @@
-
 module.exports = (req,res) => {
-    res.render("createUser")
+    res.render("updateUser");
 }
