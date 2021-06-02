@@ -4,12 +4,12 @@
 // module.exports = async (req, res) => {
 //     console.log(req.body);
 //     // Event.create({
-        
+
 //     // }, (err, event) => {
 //     //     if (err){
 //     //         return res.render("createEvent");
 //     //     }
-//     //     console.log(event); 
+//     //     console.log(event);
 //     // });
 //     let newDate = req.body.date.toString();
 //     let arrayDate = newDate.split("-");
@@ -25,6 +25,5 @@
 //     const newStaff = new Event(req.body)
 //     const saveStaff = await newStaff.save()
 //     res.send(saveStaff)
-    
-// }
 
+// }
